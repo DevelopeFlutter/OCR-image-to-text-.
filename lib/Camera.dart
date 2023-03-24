@@ -15,9 +15,9 @@ class ImageScanner extends StatefulWidget {
 class _ImageScannerState extends State<ImageScanner> {
   @override
   bool flash = false;
-  void toggleFlash() {
-    flash = !flash;
-  }
+  // void toggleFlash() {
+  //   flash = !flash;
+  // }
 
   void dispose() {
     widget.camera.dispose();
@@ -67,9 +67,9 @@ class _ImageScannerState extends State<ImageScanner> {
   XFile? Ximage; //for captured image
   Future<void> takePicture() async {
     if (widget.camera.value.isInitialized) {
-      flash
-          ? widget.camera.setFlashMode(FlashMode.always)
-          : widget.camera.setFlashMode(FlashMode.off);
+      // flash
+      //     ? widget.camera.setFlashMode(FlashMode.always)
+      //     : widget.camera.setFlashMode(FlashMode.off);
       Ximage = (await widget.camera.takePicture());
       File file = File(Ximage!.path);
 
@@ -109,17 +109,7 @@ class _ImageScannerState extends State<ImageScanner> {
             recognizedText!,
             style: const TextStyle(color: Colors.white, fontSize: 20),
           ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: TextButton(
-                  onPressed: () {
-                    toggleFlash();
-                  },
-                  child: const Text('Flash')),
-            ),
-          ),
+
         ],
       ),
     ));
