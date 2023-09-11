@@ -1,4 +1,7 @@
-// ignore_for_file: must_be_immutable, depend_on_referenced_packages, non_constant_identifier_names
+ // ignore_for_file: unused_element, depend_on_referenced_packages, duplicate_import
+
+ import 'package:camera/camera.dart';
+// ignore_for_file: must_be_immutable, depend_on_referenced_packages, non_constant_identifier_names, file_names, avoid_print
 import 'dart:io';
 
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
@@ -14,10 +17,6 @@ class ImageScanner extends StatefulWidget {
 
 class _ImageScannerState extends State<ImageScanner> {
   @override
-  bool flash = false;
-  // void toggleFlash() {
-  //   flash = !flash;
-  // }
 
   void dispose() {
     widget.camera.dispose();
@@ -116,3 +115,12 @@ class _ImageScannerState extends State<ImageScanner> {
   }
 }
 
+
+ CameraController? camera;
+  initCamera() async {
+    final cameras = await availableCameras();
+    final front = cameras.firstWhere(
+            (camera) => camera.lensDirection == CameraLensDirection.back);
+    camera = CameraController(front, ResolutionPreset.ultraHigh);
+    await camera!.initialize();
+  }
